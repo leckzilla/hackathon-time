@@ -28,8 +28,13 @@ const mainTitle = document.createElement("h1");
 mainTitle.innerHTML = "<h1 class='mainTitle'>Whale of Derail</h1>";
 app.appendChild(mainTitle);
 
+const description = document.createElement("h3");
+description.innerHTML =
+  "<h3 class='description'>Ready to take a break? Enter how many minutes your break will be below, and the whale will tell you when to get back to work!</h3>";
+app.appendChild(description);
+
 let img = document.createElement("div");
-img.innerHTML = `<p class="speech-bubble">Whale says: "Break's over! Get back to work!"</p><br/><img src="https://i.ibb.co/VCbtVDz/whale.png" /> `;
+img.innerHTML = `<div class="speech-bubble"><p>Whale says: "Break's over! Get back to work!"</p></div><br/><img src="https://i.ibb.co/VCbtVDz/whale.png" /> `;
 let timerInput = document.createElement("input");
 timerInput.innerHTML = '<input class="timerInput" />';
 app.appendChild(timerInput);
@@ -41,12 +46,12 @@ timerButton.addEventListener("click", () => {
 app.appendChild(timerButton);
 
 let timerDisplay = document.createElement("h1");
-timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining;
 timerDisplay.classList.add("timerDisplay");
 
 function countdownTimer(minutes) {
   secondsRemaining = Math.floor(((minutes * 60000) / 1000) % 60);
   minutesRemaining = Math.floor(((minutes * 60000) / 1000 / 60) % 60);
+  timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining;
   app.appendChild(timerDisplay);
 
   //convert minutes to ms (minutes*60000):
@@ -73,7 +78,6 @@ function tick(msTime) {
     ); //✅
     if (minutesRemaining === 0 && secondsRemaining === 0) {
       console.log("interval cleared");
-      console.log(img);
       app.appendChild(img);
       clearInterval(tickInterval);
     }

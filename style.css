@@ -5,24 +5,28 @@
 .app {
 }
 
-.timerInput {
+.descrip .timerInput {
 }
 
 .timerButton {
 }
 
 .timerDisplay {
+  color: #024fc9;
 }
 
 .speech-bubble {
-  background: #efefef;
+  background: #87ccec;
   border-radius: 4px;
   font-size: 1.2rem;
   line-height: 1.3;
   margin: 0 auto 40px;
+  width: auto;
   max-width: 400px;
   padding: 15px;
   position: relative;
+  font-family: "Lobster", cursive;
+  text-align: center;
 }
 p {
   margin: 0 0 10px;
@@ -32,10 +36,10 @@ p:last-of-type {
 }
 
 .speech-bubble::after {
-  border-left: 20px solid transparent;
-  border-top: 20px solid #efefef;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #87ccec;
   bottom: -20px;
   content: "";
   position: absolute;
-  right: 20px;
+  left: 20px;
 }
