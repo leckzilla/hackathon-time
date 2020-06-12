@@ -28,6 +28,8 @@ const mainTitle = document.createElement("h1");
 mainTitle.innerHTML = "<h1 class='mainTitle'>Whale of Derail</h1>";
 app.appendChild(mainTitle);
 
+let img = document.createElement("div");
+img.innerHTML = `<p class="speech-bubble">Whale says: "Break's over! Get back to work!"</p><br/><img src="https://i.ibb.co/VCbtVDz/whale.png" /> `;
 let timerInput = document.createElement("input");
 timerInput.innerHTML = '<input class="timerInput" />';
 app.appendChild(timerInput);
@@ -38,20 +40,15 @@ timerButton.addEventListener("click", () => {
 });
 app.appendChild(timerButton);
 
-//TESTING ADDING THIS CODE TO COUNTDOWNTIMER FX:
-// let timerDisplay = document.createElement("h1");
-// timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining; // countdown function
-// timerDisplay.classList.add("timerDisplay");
-// app.appendChild(timerDisplay);
+let timerDisplay = document.createElement("h1");
+timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining;
+timerDisplay.classList.add("timerDisplay");
 
 function countdownTimer(minutes) {
   secondsRemaining = Math.floor(((minutes * 60000) / 1000) % 60);
   minutesRemaining = Math.floor(((minutes * 60000) / 1000 / 60) % 60);
-
-  let timerDisplay = document.createElement("h1");
-  timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining; // countdown function
-  timerDisplay.classList.add("timerDisplay");
   app.appendChild(timerDisplay);
+
   //convert minutes to ms (minutes*60000):
   let msTime = minutes * 60000;
   //tick fx handles the actual displayed timer:
@@ -69,12 +66,15 @@ function tick(msTime) {
     console.log({ timeToDisplay });
     minutesRemaining = timeToDisplay.minutes;
     secondsRemaining = timeToDisplay.seconds;
+    timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining;
     timeRemaining -= 1000;
     console.log(
       `time remaining after interval: ${timeRemaining}; minutes: ${minutesRemaining} and seconds: ${secondsRemaining}`
     ); //✅
     if (minutesRemaining === 0 && secondsRemaining === 0) {
       console.log("interval cleared");
+      console.log(img);
+      app.appendChild(img);
       clearInterval(tickInterval);
     }
   }, 1000);
