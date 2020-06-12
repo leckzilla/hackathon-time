@@ -19,8 +19,8 @@
 // - then write function w/ sample code from MDN link to check if browser can/has permission to give notifications
 // - then trigger notification with timeout via minutes user put in (multiplied into ms)
 
-let minutesRemaining = 0;
-let secondsRemaining = 00;
+let minutesRemaining;
+let secondsRemaining;
 
 let app = document.querySelector(".app");
 
@@ -38,12 +38,20 @@ timerButton.addEventListener("click", () => {
 });
 app.appendChild(timerButton);
 
-let timerDisplay = document.createElement("h1");
-timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining; // countdown function
-timerDisplay.classList.add("timerDisplay");
-app.appendChild(timerDisplay);
+//TESTING ADDING THIS CODE TO COUNTDOWNTIMER FX:
+// let timerDisplay = document.createElement("h1");
+// timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining; // countdown function
+// timerDisplay.classList.add("timerDisplay");
+// app.appendChild(timerDisplay);
 
 function countdownTimer(minutes) {
+  secondsRemaining = Math.floor(((minutes * 60000) / 1000) % 60);
+  minutesRemaining = Math.floor(((minutes * 60000) / 1000 / 60) % 60);
+
+  let timerDisplay = document.createElement("h1");
+  timerDisplay.innerText = minutesRemaining + ":" + secondsRemaining; // countdown function
+  timerDisplay.classList.add("timerDisplay");
+  app.appendChild(timerDisplay);
   //convert minutes to ms (minutes*60000):
   let msTime = minutes * 60000;
   //tick fx handles the actual displayed timer:
@@ -55,23 +63,29 @@ function countdownTimer(minutes) {
 
 function tick(msTime) {
   let timeRemaining = msTime;
-  console.log({ timeRemaining }); //✅
+  console.log(`initial time remaining: ${timeRemaining}`); //✅
   let tickInterval = setInterval(() => {
     let timeToDisplay = getTimeRemaining(msTime, timeRemaining);
+    console.log({ timeToDisplay });
     minutesRemaining = timeToDisplay.minutes;
     secondsRemaining = timeToDisplay.seconds;
     timeRemaining -= 1000;
+    console.log(
+      `time remaining after interval: ${timeRemaining}; minutes: ${minutesRemaining} and seconds: ${secondsRemaining}`
+    ); //✅
+    if (minutesRemaining === 0 && secondsRemaining === 0) {
+      console.log("interval cleared");
+      clearInterval(tickInterval);
+    }
   }, 1000);
-  if (timeRemaining <= 0) {
-    clearInterval(tickInterval);
-  }
 }
 
 function getTimeRemaining(msTime, timeRemaining) {
-  const total = msTime - timeRemaining;
-  const seconds = Math.floor((total / 1000) % 60);
-  const minutes = Math.floor((total / 1000 / 60) % 60);
-
+  //   const total = msTime + timeRemaining;
+  console.log(`time remaining: ${timeRemaining} & total: bugger off`); //✅
+  const seconds = Math.floor((timeRemaining / 1000) % 60);
+  const minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+  console.log(`seconds: ${seconds}; minutes: ${minutes}`);
   return {
     minutes,
     seconds,
