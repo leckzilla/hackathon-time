@@ -11,5 +11,3 @@ Alexa Berry
 Liz Kaufman  
 Mell Russon  
 And maybe a little bit of help from Ben Lee. :D
-
-# hackathon-time
