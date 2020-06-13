@@ -10,6 +10,4 @@ Sarah Barkley
 Alexa Berry  
 Liz Kaufman  
 Mell Russon  
-And maybe a little bif of help from Ben Lee. :D
-
-# hackathon-time
+And maybe a little bit of help from Ben Lee. :D
